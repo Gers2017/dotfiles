@@ -1,0 +1,26 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Gers2017
+	email = Gers2017@outlook.com
+[color]
+	ui = auto
+[alias]
+	cit = commit
+	amend = cit --amend
+	ck = checkout
+	br = branch
+	st = status
+	pushu = push origin -u
+	save = stash save
+	purge = fetch -p
+	brs = branch -a
+	delbr = branch -d
+    graph = log --graph --oneline --decorate
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[pager]
+	branch = false
