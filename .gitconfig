@@ -5,18 +5,58 @@
 	email = Gers2017@outlook.com
 [color]
 	ui = auto
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
 [alias]
-	cit = commit
-	amend = cit --amend
-	ck = checkout
-	br = branch
 	st = status
-	pushu = push origin -u
-	save = stash save
+	a = add --all
+	###########
+	br = branch
+	brd = branch -d
+	brall = branch -a
+	sw = switch
+	############
+	cit = commit
+	ck = checkout
+	ca = commit -a
+	cm = commit -m
+	cam = commit -am
+	camend = cit --amend
+	#############
+	stashs = stash save
+	#############
+	f = fetch
+	fo = fetch origin
+	fu = fetch upstream
 	purge = fetch -p
-	brs = branch -a
-	delbr = branch -d
-    graph = log --graph --oneline --decorate
+	#############
+	d = diff
+	dp = diff --patience
+	dc = diff --cached
+	dk = diff --check
+	############
+	ps = push
+	psf = push -f
+	psu = push -u
+	psu = push origin -u
+	#############
+	pso = push origin
+	psfo = push -f origin
+	psuo = push -u origin
+	#############
+	graph = log --graph --oneline --decorate
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -24,3 +64,4 @@
 	process = git-lfs filter-process
 [pager]
 	branch = false
+
