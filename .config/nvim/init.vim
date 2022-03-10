@@ -1,37 +1,35 @@
 " ~/.config/nvim/init.vim
 
 " PLUGINS --------------------------------------------------
-call plug#begin()
-Plug 'jiangmiao/auto-pairs'
-Plug 'scrooloose/nerdcommenter' "<leader>cc comment <leader>cu uncomment
-" Plug 'scrooloose/nerdtree' "use :NERDTree and o open, :NERDTreeClose,<C-W>W switch window
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'karb94/neoscroll.nvim'
+call plug#begin('~/.config/nvim/plugged')
+Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
+Plug 'https://github.com/preservim/nerdtree' " NerdTree
+Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
+Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
+Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
+Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
+Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
+Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
+Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 
-" airline stuff
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'jiangmiao/auto-pairs' "For autopairs on () {} [] quotes
+Plug 'scrooloose/nerdcommenter' "<leader>cc comment <leader>cu uncomment
+Plug 'karb94/neoscroll.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 
-" bufferfly effect
-"Plug 'akinsho/bufferline.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-
-" dev icons
-Plug 'ryanoasis/vim-devicons'
-
-" gruvbox ---------
+" --------- themes ----------
 Plug 'morhetz/gruvbox'
 "Plug 'Mofiqul/dracula.nvim'
 "Plug 'olimorris/onedarkpro.nvim'
 
-"autocomplete ----------------
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+"Plug 'airblade/vim-gitgutter'
 
-" Plug 'junegunn/vim-easy-align'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Control+W followed by H/J/K/L to move to the left/bottom/top/right window accordingly
@@ -64,12 +62,21 @@ set shiftwidth=4
 " set autoindent
 set smartindent
 set shortmess+=c
+set completeopt-=preview " For No Previews
 
 syntax on
 colorscheme gruvbox
 set termguicolors
 highlight Normal ctermbg=NONE guibg=NONE
- 
+
+" --- Just Some Notes ---
+" :PlugClean :PlugInstall :UpdateRemotePlugins
+"
+" :CocInstall coc-python
+" :CocInstall coc-clangd
+" :CocInstall coc-snippets
+" :CocCommand snippets.edit... FOR EACH FILE TYPE
+
 " coc config
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
@@ -80,6 +87,33 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep=' '
 let g:airline#extensions#tabline#left_alt_sep='|'
 let g:airline#extensions#tabline#formatter='unique_tail_improved'
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
 
 "remaps :::::
 let mapleader = "," " map leader to comma
@@ -133,9 +167,13 @@ nnoremap <leader>j :m .+1<CR>==
 nnoremap <leader>k :m .-2<CR>==
 
 " Tabs remaps
-nnoremap <leader>bn :bnext<CR>
-noremap <leader>bp :bprevious<CR>
-nnoremap <leader>bd :bdelete<CR>
+"nnoremap <leader>bn :bnext<CR>
+"noremap <leader>bp :bprevious<CR>
+"nnoremap <leader>bd :bdelete<CR>
+
+nnoremap <leader><Right> :bnext<CR>
+noremap  <leader><Left> :bprevious<CR>
+nnoremap <leader>w :bdelete<CR>
 
 " Telescope
 nnoremap <leader>t :Telescope<CR>
@@ -144,16 +182,24 @@ nnoremap <leader>tg <cmd>Telescope live_grep<CR>
 nnoremap <leader>tb <cmd>Telescope buffers<CR>
 nnoremap <leader>th <cmd>Telescope help_tags<CR>
 
-" nerdtree remaps
-" nnoremap <leader>t :NERDTreeToggle<CR>
-" nnoremap <C-n> :NERDTreeToggle<CR>
-"nnoremap <C-p> :NERDTreeFind<CR>
+" NERDTree
+nnoremap <C-f> :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-p> :NERDTreeFind<CR>
 
-" NERDCommenter
-" nnoremap <leader>c :NERDTreeToggle<CR>
+nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
+
+nmap <F8> :TagbarToggle<CR>
+
+
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsible="~"
+
+inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 lua << EOF
 	require('init')
+	require('gitsigns').setup()
 EOF
 
-"require("bufferline").setup()
