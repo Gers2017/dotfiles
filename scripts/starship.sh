@@ -13,10 +13,10 @@ read Shell
 if [[ "$Shell" == "bash" || "$Shell" == "zsh" ]]; then
 	echo Using $Shell
 	if [[ "$Shell" == "bash" ]]; then
-		echo "$BASH_EVAL" >> "$HOME/.bashrc"
+		echo "$BASH_EVAL" >> "$HOME/.bashrc" &&
 		tail -5 "$HOME/.bashrc"
 	elif [[ "$Shell" == "zsh" ]]; then
-		echo "$ZSH_EVAL" >> "$HOME/.zshrc"
+		echo "$ZSH_EVAL" >> "$HOME/.zshrc" &&
 		tail -5 "$HOME/.zshrc"
 	fi
 else
