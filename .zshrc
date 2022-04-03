@@ -1,3 +1,5 @@
+eval "$(starship init zsh)"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -8,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -30,7 +32,7 @@ ZSH_THEME="robbyrussell"
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 14
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -42,7 +44,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -101,20 +103,16 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
 alias .zshrc="nvim ~/.zshrc"
 alias .ohmyzsh="nvim ~/.oh-my-zsh"
 alias starconf="nvim ~/.config/starship.toml"
-alias python="/usr/bin/python3.10"
+alias python="/usr/bin/python3"
 alias pip="pip3"
 alias initvim="nvim ~/.config/nvim/init.vim"
 alias p10k="nvim ~/.p10k.zsh"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-
-#export PATH=$PATH:/usr/local/bin/node-v17.5.0/bin
-#export PATH=$PATH:/usr/local/bin/go/bin
-
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH="$HOME/go"
 export PATH="$PATH:${GOPATH//://bin:}/bin"."$HOME/.cargo/env"
 export PATH="$PATH:$HOME/flutter/bin"
@@ -122,6 +120,3 @@ export PATH="$PATH:$HOME/flutter/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-# eval "$(starship init bash)"
