@@ -7,5 +7,5 @@ wget -O code.deb $URL &&
 echo "Installing vscode" &&
 sudo apt install ./code.deb &&
 rm -rf code.deb &&
-echo "Vscode was installed succesfuly"
+echo "Vscode was installed successfuly"
 
